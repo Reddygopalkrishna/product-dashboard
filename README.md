@@ -1,8 +1,7 @@
 🚀 Live Demo
 
-🔗 Netlify Link: https://your-netlify-link.netlify.app
+🔗 Vercel Link: [https://your-netlify-link.netlify.app](https://product-dashboard-sand-tau.vercel.app/)
 
-💻 GitHub Repository: https://github.com/yourusername/product-dashboard
 
 📋 Table of Contents
 
@@ -58,7 +57,7 @@ Frontend Framework	React.js (Vite)
 Styling	Tailwind CSS
 Icons	Lucide React
 State Management	React Hooks (useState)
-Deployment	Netlify
+Deployment	Vercel
 
 🗂️ Folder Structure
 src/
