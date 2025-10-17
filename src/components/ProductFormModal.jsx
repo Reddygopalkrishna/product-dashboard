@@ -1,11 +1,8 @@
-import React,{ useState ,useEffect} from "react";
+import React,{ useState,useEffect } from "react";
 
-
-
-const ProductFormModal = ({ onClose, onSave, editProduct }) => {
+const ProductFormModal =({ onClose, onSave, editProduct, darkMode }) => {
 
   const [formData, setFormData] = useState({
-
     name: "",
     category: "",
     price: "",
@@ -14,22 +11,17 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
   });
 
   const [uploadedImage, setUploadedImage] = useState(null);
-
   const [imagePreview, setImagePreview] = useState("");
 
   useEffect(() => {
-
     if (editProduct) {
-
       setFormData(editProduct);
-
       setImagePreview(editProduct.image || "");
     }
   }, [editProduct]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-
     if (file) {
       setUploadedImage(file);
       const reader = new FileReader();
@@ -42,66 +34,85 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
   };
 
   const handleURLChange = (e) => {
-
     setFormData({ ...formData, image: e.target.value });
     setUploadedImage(null);
     setImagePreview(e.target.value);
   };
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    onSave({ ...formData, image: uploadedImage||formData.image });
+    onSave({ ...formData, image: uploadedImage || formData.image });
     setFormData({ name: "", category: "", price: "", inStock: true, image: "" });
     setUploadedImage(null);
     setImagePreview("");
   };
 
   return (
+
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-slate-700">
-        <div className="sticky top-0 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-700 px-6 py-4 rounded-t-2xl">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className={`rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border ${
+        darkMode 
+          ? 'bg-slate-800 border-slate-700' 
+          : 'bg-white border-gray-200'
+      }`}>
+        <div className={`sticky top-0 border-b px-6 py-4 rounded-t-2xl ${
+          darkMode 
+            ? 'bg-slate-800 border-slate-700' 
+            : 'bg-white border-gray-200'
+        }`}>
+          <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             {editProduct ? "Edit Product" : "Add New Product"}
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            {editProduct ? "Update product details" : ""}
+          <p className={`text-sm mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            {editProduct ? "Update product details" : "Fill in the product information"}
           </p>
         </div>
 
         <div className="p-6 space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className={`block text-sm font-semibold mb-2 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Product Name
             </label>
-
             <input
               type="text"
               placeholder="Enter product name"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value })}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-400"
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 placeholder-gray-400 ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-600 text-white focus:ring-blue-400'
+                  : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500'
+              }`}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className={`block text-sm font-semibold mb-2 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Category
             </label>
-
             <input
               type="text"
               placeholder="e.g., Electronics, Clothing"
               value={formData.category}
-              onChange={(e) => setFormData({...formData, category: e.target.value })}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-400"
+              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 placeholder-gray-400 ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-600 text-white focus:ring-blue-400'
+                  : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500'
+              }`}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className={`block text-sm font-semibold mb-2 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Price ($)
             </label>
             <input
@@ -110,13 +121,19 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
               placeholder="0.00"
               value={formData.price}
               onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-400"
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 placeholder-gray-400 ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-600 text-white focus:ring-blue-400'
+                  : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500'
+              }`}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className={`block text-sm font-semibold mb-2 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Image URL
             </label>
             <input
@@ -125,12 +142,18 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
               value={formData.image}
               onChange={handleURLChange}
               disabled={uploadedImage !== null}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-600 text-white focus:ring-blue-400'
+                  : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500'
+              }`}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className={`block text-sm font-semibold mb-2 ${
+              darkMode ? 'text-gray-300' : 'text-gray-700'
+            }`}>
               Or Upload Image
             </label>
             <input
@@ -138,24 +161,33 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
               accept="image/*"
               onChange={handleImageUpload}
               disabled={formData.image !== ""}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-gray-300 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:border-transparent transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-600 text-white focus:ring-blue-400'
+                  : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500'
+              }`}
             />
           </div>
 
           {imagePreview && (
+
             <div className="relative">
               <img
                 src={imagePreview}
                 alt="Preview"
-                className="w-full h-48 object-cover rounded-xl border-2 border-gray-200 dark:border-slate-600"
+                className={`w-full h-48 object-cover rounded-xl border-2 ${
+                  darkMode ? 'border-slate-600' : 'border-gray-200'
+                }`}
               />
               <div className="absolute top-2 right-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full">
                 Preview
               </div>
+
             </div>
           )}
 
           <label className="flex items-center gap-3 cursor-pointer group">
+
             <div className="relative">
               <input
                 type="checkbox"
@@ -163,10 +195,16 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
                 onChange={(e) => setFormData({ ...formData, inStock: e.target.checked })}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-300 dark:bg-slate-600 rounded-full peer-checked:bg-green-500 transition-all duration-200"></div>
-              <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 peer-checked:translate-x-5"></div>
+              <div className={`w-11 h-6 rounded-full transition-all duration-200 ${
+                formData.inStock ? 'bg-green-500' : darkMode ? 'bg-slate-600' : 'bg-gray-300'
+              }`}></div>
+
+              <div className={`absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ${
+                formData.inStock ? 'translate-x-5' : ''
+              }`}></div>
+
             </div>
-            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+            <span className={`text-sm font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
               Product in stock
             </span>
           </label>
@@ -175,7 +213,11 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-5 py-3 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-200"
+              className={`flex-1 px-5 py-3 font-semibold rounded-xl transition-all duration-200 ${
+                darkMode
+                  ? 'bg-slate-700 hover:bg-slate-600 text-gray-300'
+                  : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
+              }`}
             >
               Cancel
             </button>
@@ -186,14 +228,19 @@ const ProductFormModal = ({ onClose, onSave, editProduct }) => {
             >
               {editProduct ? "Update" : "Add Product"}
             </button>
-          </div>
 
+            
+          </div>
         </div>
+
+
       </div>
-      
+
+
     </div>
+
+
   );
 };
 
-
-export default ProductFormModal;
+export default ProductFormModal

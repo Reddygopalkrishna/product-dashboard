@@ -2,36 +2,51 @@ import { Edit2, Trash2, Tag, DollarSign, Package } from "lucide-react";
 import React from "react";
 
 
-const ProductCard =({ product, onEdit, onDelete }) =>{
+const ProductCard =({ product, onEdit, onDelete, darkMode }) => {
+
 
   return (
 
-    <div className="group bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-2xl dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-700 overflow-hidden transition-all duration-300 hover:-translate-y-1">
-      <div className="relative h-48 sm:h-56 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-700 dark:to-slate-800">
+
+    <div className={`group rounded-2xl shadow-md hover:shadow-2xl border overflow-hidden transition-all duration-300 hover:-translate-y-1 ${
+      darkMode 
+        ? 'bg-slate-800 border-slate-700 shadow-slate-900/50' 
+        : 'bg-white border-gray-100'
+    }`}>
+
+      <div className={`relative h-48 sm:h-56 overflow-hidden bg-gradient-to-br ${
+        darkMode ? 'from-slate-700 to-slate-800' : 'from-gray-50 to-gray-100'
+      }`}>
 
         <img 
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
         <div className="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
           <button
             onClick={onEdit}
-            className="p-2.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-xl shadow-lg hover:bg-blue-50 dark:hover:bg-blue-900/50 transition-all duration-200 border border-white/20"
+            className={`p-2.5 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 border border-white/20 ${
+              darkMode
+                ? 'bg-slate-900/95 hover:bg-blue-900/50'
+                : 'bg-white/95 hover:bg-blue-50'
+            }`}
             aria-label="Edit product"
           >
-            <Edit2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            <Edit2 className={`w-4 h-4 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
           </button>
-
           <button
             onClick={onDelete}
-            className="p-2.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm rounded-xl shadow-lg hover:bg-red-50 dark:hover:bg-red-900/50 transition-all duration-200 border border-white/20"
+            className={`p-2.5 backdrop-blur-sm rounded-xl shadow-lg transition-all duration-200 border border-white/20 ${
+              darkMode
+                ? 'bg-slate-900/95 hover:bg-red-900/50'
+                : 'bg-white/95 hover:bg-red-50'
+            }`}
             aria-label="Delete product"
           >
-            <Trash2 className="w-4 h-4 text-red-600 dark:text-red-400" />
+            <Trash2 className={`w-4 h-4 ${darkMode ? 'text-red-400' : 'text-red-600'}`} />
           </button>
         </div>
 
@@ -48,28 +63,43 @@ const ProductCard =({ product, onEdit, onDelete }) =>{
       </div>
 
       <div className="p-4 sm:p-5">
-        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 min-h-[3.5rem]">
+        <h3 className={`text-lg sm:text-xl font-bold mb-3 line-clamp-2 min-h-[3.5rem] ${
+          darkMode ? 'text-white' : 'text-gray-900'
+        }`}>
           {product.name}
         </h3>
 
         <div className="flex items-center justify-between">
           <div className="flex items-baseline gap-1">
-            <DollarSign className="w-4 h-4 text-green-600 dark:text-green-400" />
-            <span className="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400">
+            <DollarSign className={`w-4 h-4 ${darkMode ? 'text-green-400' : 'text-green-600'}`} />
+            <span className={`text-2xl sm:text-3xl font-bold ${darkMode ? 'text-green-400' : 'text-green-600'}`}>
               {product.price.toFixed(2)}
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
-            <Tag className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-            <span className="text-xs font-semibold text-blue-700 dark:text-blue-300 uppercase tracking-wide truncate max-w-[80px]">
+          <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg ${
+            darkMode ? 'bg-blue-900/30' : 'bg-blue-50'
+          }`}>
+            <Tag className={`w-3.5 h-3.5 ${darkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+            <span className={`text-xs font-semibold uppercase tracking-wide truncate max-w-[80px] ${
+              darkMode ? 'text-blue-300' : 'text-blue-700'
+            }`}>
               {product.category}
             </span>
           </div>
+
+
+          
         </div>
+
       </div>
+
+
+
     </div>
   );
+
+
 };
 
-export default ProductCard;
+export default ProductCard
