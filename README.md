@@ -1,6 +1,6 @@
 🚀 Live Demo
 
-🔗 Vercel Link: [https://your-netlify-link.netlify.app](https://product-dashboard-sand-tau.vercel.app/)
+🔗 Vercel Link: [Live Dashboard](https://product-dashboard-sand-tau.vercel.app/)
 
 
 📋 Table of Contents
