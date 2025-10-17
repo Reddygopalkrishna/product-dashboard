@@ -141,7 +141,7 @@ const App = () =>{
             <p className={`text-sm sm:text-base mb-6 ${
               darkMode ? 'text-gray-400' : 'text-gray-500'
             }`}>
-              {products.length === 0 ? "Get started by adding your first product" : "Try adjusting your search or filters"}
+              {products.length === 0 ? "Add a products" : "Try adjusting your search or filters"}
             </p>
             {products.length === 0 && (
               <button
