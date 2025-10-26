@@ -73,7 +73,7 @@ const ProductCard =({ product, onEdit, onDelete, darkMode }) => {
           <div className="flex items-baseline gap-1">
             <DollarSign className={`w-4 h-4 ${darkMode ? 'text-green-400' : 'text-green-600'}`} />
             <span className={`text-2xl sm:text-3xl font-bold ${darkMode ? 'text-green-400' : 'text-green-600'}`}>
-              {product.price.toFixed(2)}
+              {product.price}
             </span>
           </div>
 
