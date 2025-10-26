@@ -27,9 +27,6 @@ const Header = ({ onAdd, darkMode, setDarkMode }) => {
               }`}>
                 Product Dashboard
               </h1>
-              <p className={`hidden sm:block text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                Manage your inventory
-              </p>
             </div>
           </div>
 
