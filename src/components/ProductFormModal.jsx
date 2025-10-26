@@ -54,10 +54,10 @@ const handleURLChange = (e) => {
   setFormData({ ...formData, image: url });
   setUploadedImage(null);
 
-  const isValidImageURL = /^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i.test(url);
+  const isValidImageURL = /^https?:\/\/.+/i.test(url); 
   //  setImagePreview(url)
   if (isValidImageURL) {
-    setImagePreview(url);
+    setImagePreview(isValidImageURL ? url : null);
    
   } else {
     setImagePreview("");
@@ -216,8 +216,14 @@ const handleURLChange = (e) => {
                     : "bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500"
                 }`}
                 required
-              />
-            </div>
+                      />
+                {formData.image && !imagePreview && (
+                <p className="text-red-500 text-xs mt-1">
+                  Please enter a valid URL starting with http:// or https://
+                </p>
+              )}
+
+        </div>
 
          
             <div>
@@ -257,7 +263,7 @@ const handleURLChange = (e) => {
               </div>
             )}
 
-            {/* In Stock Toggle */}
+          
             <label className="flex items-center gap-3 cursor-pointer group">
               <div className="relative">
                 <input
@@ -292,7 +298,7 @@ const handleURLChange = (e) => {
               </span>
             </label>
 
-            {/* Buttons */}
+            
             <div className="flex gap-3 pt-4">
               <button
                 type="button"
