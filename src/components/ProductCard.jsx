@@ -24,15 +24,11 @@ const ProductCard =({ product, onEdit, onDelete, darkMode }) => {
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <div className="
-  absolute top-3 right-3 flex gap-2
-  opacity-100                   /* visible on mobile */
-  sm:opacity-0                  /* hide on desktop by default */
-  sm:group-hover:opacity-100    /* show on desktop hover */
+        <div className="absolute top-3 right-3 flex gap-2 opacity-100                   sm:opacity-0                  sm:group-hover:opacity-100    
   transition-all duration-300 transform
-  translate-y-0                 /* no slide on mobile */
-  sm:translate-y-2              /* slide effect desktop */
-  sm:group-hover:translate-y-0  /* reset slide on hover */
+  translate-y-0                 
+  sm:translate-y-2            
+  sm:group-hover:translate-y-0  
 ">
 
           <button

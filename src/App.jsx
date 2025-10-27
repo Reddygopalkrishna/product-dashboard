@@ -61,7 +61,7 @@ const App = () =>{
   });
 
   return (
-    <div className={`min-h-screen transition-colors duration-100 ${
+    <div className={`min-h-screen transition-colors duration-200 ${
       darkMode 
         ? 'bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950' 
         : 'bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50'
