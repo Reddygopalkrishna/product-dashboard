@@ -215,7 +215,7 @@ const handleURLChange = (e) => {
                     ? "bg-slate-900 border-slate-600 text-white focus:ring-blue-400"
                     : "bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500"
                 }`}
-                required
+                required={!imagePreview && !uploadedImage}
                       />
                 {formData.image && !imagePreview && (
                 <p className="text-red-500 text-xs mt-1">
